@@ -1,7 +1,6 @@
-#from ESC import Candidate
+# from ESC import Candidate
 from Transaction import Transaction
 import datetime
-
 
 
 class DistrictSmartContract:
@@ -21,8 +20,6 @@ class DistrictSmartContract:
     def getCandidates(self):
         return self.candidateList
 
-
-
     def validateCandidate(self, candId):
         for i in range(len(self.candidateList)):
             if candId == self.candidateList[i].candidate_id:
@@ -35,11 +32,11 @@ class DistrictSmartContract:
     #     return False
 
     def returnResults(self):
-        return voteCount, partyCount
+        return self.voteCount, self.partyCount
 
     def castVote(self, candId):
         if not self.validateCandidate(candId):
-            return False, None
+            return False, None, self.voteCount
         # if not self.validateDate(datetime.date.today()):
         #     return False, None
 
@@ -48,10 +45,14 @@ class DistrictSmartContract:
         return True, transaction, self.voteCount
 
         # Vote is valid.
-#ISSUE WITH PARTY COUNT
+
+    # ISSUE WITH PARTY COUNT
     def validVote(self, candId):
 
         self.transId += 1
         self.voteCount[candId] += 1
 
-        self.partyCount[self.candidateList[candId].party_id] += 1
+        # for i in range(len(self.candidateList)):
+        #     if self.candidateList[i].candidate_id == candId:
+        #         self.partyCount[self.candidateList[i].party_id] += 1
+        #         break
